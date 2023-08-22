@@ -70,10 +70,9 @@ function Modal() {
 
         <div className="relative pt-[56.25%]">
           <ReactPlayer
-            url={
-              `https://www.youtube.com/watch?v=${trailer}` ||
-              `https://www.youtube.com/shorts/EQZgYz6D4_c`
-            }
+            url={`https://www.youtube.com/watch?v=${
+              trailer ? trailer : `HzWhZ6Uj000`
+            }`}
             width="100%"
             height="100%"
             style={{ position: "absolute", top: "0", left: "0" }}
