@@ -35,7 +35,7 @@ const Home = ({
   trendingNow,
   products,
 }: Props) => {
-  console.log(products);
+  console.log(payments);
   const { loading } = useAuth();
   const showModal = useRecoilValue(modalState);
   const subscription = false;
