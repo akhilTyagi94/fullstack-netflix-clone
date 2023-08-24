@@ -10,7 +10,8 @@ import { modalState } from "@/atoms/modalAtom";
 import Modal from "@/components/Modal";
 import Plans from "@/components/Plans";
 import { Product, getProducts } from "@stripe/firestore-stripe-payments";
-import payments from "@/lib/stripe";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/firebase";
 
 interface Props {
   netflixOriginals: Movie[];
@@ -35,14 +36,14 @@ const Home = ({
   trendingNow,
   products,
 }: Props) => {
-  console.log(payments);
+  console.log(products);
   const { loading } = useAuth();
   const showModal = useRecoilValue(modalState);
   const subscription = false;
 
   if (loading || subscription === null) return null;
 
-  if (!subscription) return <Plans />;
+  if (!subscription) return <Plans products={products} />;
 
   return (
     <div className="relative h-screen bg-gradient-to-b lg:h-[140vh]">
@@ -71,12 +72,9 @@ const Home = ({
 export default Home;
 
 export const getServerSideProps = async () => {
-  const products = await getProducts(payments, {
-    includePrices: true,
-    activeOnly: true,
-  })
-    .then((res) => res)
-    .catch((error) => console.log(error.message));
+  const productsCollection = collection(db, "products");
+  const productsSnapshot = await getDocs(productsCollection);
+  const products = productsSnapshot.docs.map((doc) => doc.data());
 
   const [
     netflixOriginals,
@@ -108,7 +106,7 @@ export const getServerSideProps = async () => {
       horrorMovies: horrorMovies.results,
       romanceMovies: romanceMovies.results,
       documentaries: documentaries.results,
-      products: products,
+      products,
     },
   };
 };

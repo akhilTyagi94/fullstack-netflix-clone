@@ -4,7 +4,11 @@ import { Product } from "@stripe/firestore-stripe-payments";
 import Head from "next/head";
 import Link from "next/link";
 
-function Plans() {
+interface Props {
+  products: Product[];
+}
+
+function Plans({ products }: Props) {
   const { logout } = useAuth();
 
   return (
@@ -52,7 +56,11 @@ function Plans() {
         </ul>
 
         <div className="mt-4 flex flex-col space-y-4">
-          <div className="flex w-full items-center justify-end self-end md:w-3/5"></div>
+          <div className="flex w-full items-center justify-end self-end md:w-3/5">
+            {products.map((product) => (
+              <div key={product.id}>{product.name}</div>
+            ))}
+          </div>
           {/* <Table /> */}
           <button>Subscribe</button>
         </div>
