@@ -3,6 +3,7 @@ import { CheckIcon } from "@heroicons/react/24/solid";
 import { Product } from "@stripe/firestore-stripe-payments";
 import Head from "next/head";
 import Link from "next/link";
+import Table from "./Table";
 
 interface Props {
   products: Product[];
@@ -58,10 +59,12 @@ function Plans({ products }: Props) {
         <div className="mt-4 flex flex-col space-y-4">
           <div className="flex w-full items-center justify-end self-end md:w-3/5">
             {products.map((product) => (
-              <div key={product.id}>{product.name}</div>
+              <div key={product.id} className="planBox">
+                {product.name}
+              </div>
             ))}
           </div>
-          {/* <Table /> */}
+          <Table />
           <button>Subscribe</button>
         </div>
       </main>
