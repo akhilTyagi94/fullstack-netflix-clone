@@ -1,5 +1,6 @@
 import useAuth from "@/hooks/useAuth";
 import { BellIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -26,8 +27,8 @@ function Header() {
   return (
     <header className={`${isScrolled && "bg-[#141414]"}`}>
       <div className="flex items-center space-x-2 md:space-x-10">
-        <img
-          src="https://rb.gy/ulxxee"
+        <Image
+          src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
           width={100}
           height={100}
           alt="Netflix"
@@ -47,10 +48,12 @@ function Header() {
         <p className="hidden lg:inline">Kids</p>
         <BellIcon className="h-6 w-6" />
         {/* <Link href="#"> */}
-        <img
+        <Image
           onClick={logout}
-          src="https://rb.gy/1k10n"
+          src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
           alt="account"
+          height={32}
+          width={32}
           className="h-8 w-8 cursor-pointer rounded"
         />
         {/* </Link> */}
